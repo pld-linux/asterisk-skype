@@ -3,7 +3,7 @@
 Summary:	Digium's Skype For Asterisk
 Name:		asterisk-skype
 Version:	1.0.6
-Release:	1
+Release:	2
 License:	Proprietary
 Group:		Applications/System
 Source0:	%{dl_url}/x86-32/skypeforasterisk-%{asterisk_ver}_%{version}-x86_32.tar.gz
@@ -22,6 +22,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/asterisk
 %define		moduledir	%{_libdir}/asterisk/modules
+%define		spooldir	%{_localstatedir}/spool/asterisk/skype
 
 %description
 Skype For Asterisk (SFA) is the first and only native channel driver
@@ -34,7 +35,7 @@ and to purchase license keys: <http://www.digium.com/skype/>.
 
 %prep
 %ifarch %{ix86}
-%setup -qT -n skypeforasterisk-%{asterisk_ver}_%{version}-x86_64 -b0
+%setup -qT -n skypeforasterisk-%{asterisk_ver}_%{version}-x86_32 -b0
 %endif
 %ifarch %{x8664}
 %setup -qT -n skypeforasterisk-%{asterisk_ver}_%{version}-x86_64 -b1
@@ -53,7 +54,7 @@ s,%{_prefix}/lib/asterisk,%{_libdir}/asterisk,
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{moduledir}}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{moduledir},%{spooldir}/data}
 %{__make} install samples \
 	DESTDIR=$RPM_BUILD_ROOT
 
@@ -66,3 +67,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(640,root,asterisk) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/chan_skype.conf
 %attr(755,root,root) %{moduledir}/chan_skype.so
 %attr(755,root,root) %{moduledir}/res_skypeforasterisk.so
+%dir %attr(770,root,asterisk) %{spooldir}
+%dir %attr(770,root,asterisk) %{spooldir}/data
