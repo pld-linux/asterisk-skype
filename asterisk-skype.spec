@@ -3,7 +3,7 @@
 Summary:	Digium's Skype For Asterisk
 Name:		asterisk-skype
 Version:	1.0.6
-Release:	0.1
+Release:	1
 License:	Proprietary
 Group:		Applications/System
 Source0:	%{dl_url}/x86-32/skypeforasterisk-%{asterisk_ver}_%{version}-x86_32.tar.gz
@@ -16,6 +16,7 @@ URL:		http://www.digium.com/skype/
 BuildRequires:	asterisk-devel >= %{asterisk_ver}
 BuildRequires:	sed >= 4.0
 Requires:	asterisk >= %{asterisk_ver}
+Requires:	group(asterisk)
 ExclusiveArch:	%{ix86} %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -62,6 +63,6 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README chan_skype.conf.sample
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/chan_skype.conf
+%attr(640,root,asterisk) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/chan_skype.conf
 %attr(755,root,root) %{moduledir}/chan_skype.so
 %attr(755,root,root) %{moduledir}/res_skypeforasterisk.so
