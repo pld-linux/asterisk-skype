@@ -1,16 +1,16 @@
 %define		dl_url	http://downloads.digium.com/pub/telephony/skypeforasterisk/asterisk-%{asterisk_ver}/
-%define		asterisk_ver	1.6.1
+%define		asterisk_ver	1.6.2.0
 Summary:	Digium's Skype For Asterisk
 Name:		asterisk-skype
-Version:	1.0.6
-Release:	2
+Version:	1.0.9.2
+Release:	1
 License:	Proprietary
 Group:		Applications/System
 Source0:	%{dl_url}/x86-32/skypeforasterisk-%{asterisk_ver}_%{version}-x86_32.tar.gz
-# NoSource0-md5:	956264998c994f184fc7310aae63d2d4
+# NoSource0-md5:	d65978a7d7a21762b15ac8d792b54324
 NoSource:	0
 Source1:	%{dl_url}/x86-64/skypeforasterisk-%{asterisk_ver}_%{version}-x86_64.tar.gz
-# NoSource1-md5:	18050344e5ed4edcf03953a863d248e7
+# NoSource1-md5:	5de92df856eab0ccab02a8581f32ece3
 NoSource:	1
 URL:		http://www.digium.com/skype/
 BuildRequires:	asterisk-devel >= %{asterisk_ver}
